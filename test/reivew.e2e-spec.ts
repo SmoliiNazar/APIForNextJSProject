@@ -9,9 +9,9 @@ import { REVIEW_NOT_FOUND } from '../src/review/review.constants';
 const productId = new Types.ObjectId().toHexString();
 
 const testDto: CreateReviewDto = {
-	name: 'Тест',
-	title: 'Заголовок',
-	description: 'Описание тестовое',
+	name: 'Test',
+	title: 'Title',
+	description: 'Test descr',
 	rating: 5,
 	productId
 };
@@ -37,6 +37,17 @@ describe('AppController (e2e)', () => {
 			.then(({ body }: request.Response) => {
 				createdId = body._id;
 				expect(createdId).toBeDefined();
+				done();
+			});
+	});
+
+	it('/review/create (POST) - fail', async (done) => {
+		return request(app.getHttpServer())
+			.post('/review/create')
+			.send({...testDto, rating: 0})
+			.expect(400)
+			.then(({ body }: request.Response) => {
+				console.log(body);
 				done();
 			});
 	});
