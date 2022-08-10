@@ -1,0 +1,1 @@
+export const REVIEW_NOT_FOUND = 'Response with such id not found';
