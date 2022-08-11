@@ -1,13 +1,16 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
+import { CreateProductDto } from './dto/create-product.dto';
 import { FindProductDTO } from './dto/find-product.dto';
 import { ProductModel } from './product.model';
+import { ProductService } from './product.service';
 
 @Controller('product')
 export class ProductController {
+    constructor(private readonly productService: ProductService) { }
     
     @Post('create')
-    async create(@Body() dto: Omit<ProductModel, '_id'>) {
-
+    async create(@Body() dto: CreateProductDto) {
+        return  this.productService.create(dto);
     }
 
     @Get(':id')
