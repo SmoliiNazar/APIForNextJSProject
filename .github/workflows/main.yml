@@ -1,0 +1,19 @@
+name: Publish Docker
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    run-on: ubuntu=latest
+    step:
+      - uses: actions/checkout@master
+      - name: Publish to registy
+        uses: elgohr/Publish-docker-Github-Action@master
+        with: 
+          registry: docker.pkg.github.com
+          name: docker.pkg.github.com/SmoliiNazar/APIForNextJSProject/top-api
+          username: ${{ sercrets.DOCKER_USERNAME }}
+          password: ${{ sercrets.DOCKER_PASSWORD }}
+          tags: "develop"
