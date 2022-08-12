@@ -3,11 +3,8 @@ services:
   mongo:
     image: mongo:4.4.4
     container_name: mongo
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
+    restart: always
     ports:
-      - 27017:27017
+      - 3000:3000
     volumes:
-      - ./mongo-data-4.4:/data/db
-    command: --wiredTigerCacheSizeGB 1.5
+      - ./.env:/opt/app/.env
